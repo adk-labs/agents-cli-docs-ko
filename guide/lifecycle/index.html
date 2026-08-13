@@ -1,0 +1,2303 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ADK 에이전트 개발 라이프사이클 전체를 지원하는 통합 CLI">
+      
+      
+      
+      
+        <link rel="prev" href="../getting-started/">
+      
+      
+        <link rel="next" href="../quickstart-tutorial/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_sm.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>라이프사이클 - agents-cli (한국어 문서)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans KR";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="agents-cli (한국어 문서)" class="md-header__button md-logo" aria-label="agents-cli (한국어 문서)" data-md-component="logo">
+      
+  <img src="../../assets/logo_sm.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            agents-cli (한국어 문서)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              라이프사이클
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/adk-labs/agents-cli-docs-ko" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.01 8.01 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8"/></svg>
+  </div>
+  <div class="md-source__repository">
+    adk-labs/agents-cli-docs-ko
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  홈
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../getting-started/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  가이드
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  레퍼런스
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="agents-cli (한국어 문서)" class="md-nav__button md-logo" aria-label="agents-cli (한국어 문서)" data-md-component="logo">
+      
+  <img src="../../assets/logo_sm.png" alt="logo">
+
+    </a>
+    agents-cli (한국어 문서)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/adk-labs/agents-cli-docs-ko" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.01 8.01 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8"/></svg>
+  </div>
+  <div class="md-source__repository">
+    adk-labs/agents-cli-docs-ko
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    홈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    가이드
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    가이드
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개요
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    개요
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    라이프사이클
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    라이프사이클
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        단일 조사 과정 살펴보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        순환하는 4가지 CLI 동사
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        루프가 없을 때 발생하는 문제
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8단계 프로세스
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8단계 프로세스">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0-spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0 · Spec (명세)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-scaffold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 · Scaffold (스캐폴드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 · Build (구축)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-orchestrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 · Orchestrate (오케스트레이션)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-evaluate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 · Evaluate (평가)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 · Deploy (배포)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-publish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 · Publish (게시)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-observe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 · Observe (관찰)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실행하는 두 가지 방법
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        더 자세히 알아보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart-tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    튜토리얼: 첫 에이전트 빌드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hands-on-tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    튜토리얼: 수동 워크플로우
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    활용 사례
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    인증
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개발
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    개발
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개발 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    프로젝트 구조
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../templates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    에이전트 템플릿
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    평가
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    평가
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    평가 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    배포 및 운영
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    배포 및 운영
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cicd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD 및 운영 환경
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../observability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    관찰 가능성
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4_3" id="__nav_2_4_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    관찰 가능성
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../observability/cloud-trace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud Trace
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../observability/bq-agent-analytics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BigQuery 플러그인
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    레퍼런스
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    레퍼런스
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI 명세
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스킬 목록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    프로젝트 소개
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/from-agent-starter-pack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Starter Pack 마이그레이션
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/eval-dataset-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    평가 데이터셋 마이그레이션
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        단일 조사 과정 살펴보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        순환하는 4가지 CLI 동사
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        루프가 없을 때 발생하는 문제
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8단계 프로세스
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8단계 프로세스">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0-spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0 · Spec (명세)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-scaffold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 · Scaffold (스캐폴드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 · Build (구축)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-orchestrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 · Orchestrate (오케스트레이션)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-evaluate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 · Evaluate (평가)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 · Deploy (배포)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-publish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 · Publish (게시)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-observe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 · Observe (관찰)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실행하는 두 가지 방법
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        더 자세히 알아보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="네비게이션" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    홈
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../getting-started/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    가이드
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../getting-started/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    개요
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">라이프사이클<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>Agents CLI는 <strong>"노트북에서는 잘 동작함"</strong>과 <strong>"프로덕션 라이브"</strong> 사이의 루프라는 한 가지 철학에 집중합니다. 이 페이지는 그 지도 역할을 합니다.</p>
+<h2 id="_2">단일 조사 과정 살펴보기<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>일주일 동안 라이브 상태였던 장애 복구 에이전트를 상상해 보세요. 장애 알림이 발생합니다:</p>
+<div id="lifecycle-anim-transcript" class="lifecycle-anim" aria-label="Auto-playing transcript of an outage investigation"></div>
+
+<p>이 조사에는 <strong>4.3초</strong>가 걸렸습니다. <em>에이전트 자체</em>의 특별한 점은 없습니다 — 대부분의 에이전트 프레임워크가 이를 표현할 수 있습니다. 특별한 것은 그 주변의 모든 환경입니다: 파괴적인 복구 조치를 권장했다면 배포를 허용하지 않았을 평가 루브릭, 런북 검색이 잘못된 섹션을 반환하는 것을 차단했을 CI 검사, 내일 무언가 잘못되었을 때 동일한 조사를 재현할 수 있게 해주는 트레이스입니다.</p>
+<p>이것이 바로 루프입니다.</p>
+<h2 id="4-cli">순환하는 4가지 CLI 동사<a class="headerlink" href="#4-cli" title="Permanent link">&para;</a></h2>
+<div id="lifecycle-anim-loop" class="lifecycle-anim" aria-label="The four CLI verbs in a continuous loop"></div>
+
+<p><code>scaffold</code>, <code>eval</code>, <code>deploy</code>, observe — 영원히 순환합니다. 사용자가 명세를 작성하면, 루프는 배포될 뻔한 오류를 잡아내고, 통과한 코드를 배포하며, 다음 결과를 보여주어 다음 반복을 더 똑똑하게 만듭니다.</p>
+<h2 id="_3">루프가 없을 때 발생하는 문제<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>대부분의 에이전트 데모는 프롬프트 단계에서 멈춥니다. 영리한 지시사항을 작성하면 모델이 노트북에서 훌륭해 보이는 결과를 반환하고, 이를 팀에 캡처하여 보여줍니다. 하지만 프로덕션 환경 배포에는 실전의 도전 과제들이 존재합니다.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>루프가 없을 때</th>
+<th>Agents CLI 사용 시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>환각에 의한 복구 조치 제안</strong></td>
+<td>머지 후 고객 측에서 사후 발견</td>
+<td>머지 전 평가 루브릭이 PR을 차단</td>
+</tr>
+<tr>
+<td><strong>툴 API 변경</strong></td>
+<td>새벽 2시 장애 알림, 에이전트 오동작</td>
+<td>CI 통합 테스트가 스키마 변경 감지</td>
+</tr>
+<tr>
+<td><strong>프로덕션 오용</strong></td>
+<td>리플레이 및 텔레메트리 없음</td>
+<td>Cloud Trace + BigQuery 분석을 통해 1시간 이내 포착</td>
+</tr>
+<tr>
+<td><strong>과도한 툴 호출로 인한 비용 급증</strong></td>
+<td>다음 달 청구서가 알림 역할</td>
+<td>툴별 스팬 카운트를 통해 몇 시간 내 포착</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8">8단계 프로세스<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<p>루프를 천천히 살펴보면 8개 단계로 확장됩니다. 각 단계에는 <a href="../../reference/skills/">스킬</a>에 인코딩된 철학이 있어 코딩 에이전트가 최선의 선택을 하도록 돕습니다.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>단계</th>
+<th>역할</th>
+<th>CLI 동사</th>
+<th>스킬</th>
+<th>상세 가이드</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><strong>Spec (명세)</strong></td>
+<td><code>.agents-cli-spec.md</code>를 작성합니다. 다른 단계들은 이 명세에서 파생됩니다.</td>
+<td>—</td>
+<td><code>google-agents-cli-workflow</code></td>
+<td><a href="../development/">개발 가이드</a></td>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>Scaffold (스캐폴드)</strong></td>
+<td>명세를 프로덕션 형태의 프로젝트(~72개 파일)로 변환합니다.</td>
+<td><code>scaffold create</code></td>
+<td><code>google-agents-cli-scaffold</code></td>
+<td><a href="../templates/">템플릿</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Build (구축)</strong></td>
+<td>모델, 지시사항, 툴, <code>App</code> 래퍼 등 에이전트 본체를 작성합니다.</td>
+<td>—</td>
+<td><code>google-agents-cli-adk-code</code></td>
+<td><a href="../project-structure/">프로젝트 구조</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Orchestrate (오케스트레이션)</strong></td>
+<td>단일 에이전트가 팀으로 확장될 때 전문 에이전트들을 구성합니다.</td>
+<td>—</td>
+<td><code>google-agents-cli-adk-code</code></td>
+<td><a href="../project-structure/">프로젝트 구조</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Evaluate (평가)</strong></td>
+<td>모든 배포 전에 데이터셋 대비 에이전트 점수를 측정합니다.</td>
+<td><code>eval generate</code>, <code>eval grade</code> 및 <code>eval dataset synthesize</code>, <code>eval compare</code>, <code>eval analyze</code>, <code>eval metric list</code>, <code>eval optimize</code></td>
+<td><code>google-agents-cli-eval</code></td>
+<td><a href="../evaluation/">평가</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Deploy (배포)</strong></td>
+<td>Agent Runtime, Cloud Run 또는 GKE에 배포합니다.</td>
+<td><code>deploy</code></td>
+<td><code>google-agents-cli-deploy</code></td>
+<td><a href="../deployment/">배포</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Publish (게시)</strong></td>
+<td>다른 에이전트가 검색할 수 있도록 Gemini Enterprise에 등록합니다.</td>
+<td><code>publish</code></td>
+<td><code>google-agents-cli-publish</code></td>
+<td><a href="../cicd/">CI/CD</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Observe (관찰)</strong></td>
+<td>Cloud Trace + BigQuery 분석을 수행하며, 프로덕션 데이터는 내일의 데이터셋으로 환원됩니다.</td>
+<td>—</td>
+<td><code>google-agents-cli-observability</code></td>
+<td><a href="../observability/">관찰 가능성</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="0-spec">0 · Spec (명세)<a class="headerlink" href="#0-spec" title="Permanent link">&para;</a></h3>
+<p><code>.agents-cli-spec.md</code>는 에이전트의 툴, 제약 조건 및 성공 기준을 정의합니다. 라이프사이클의 나머지 모든 부분이 이 명세를 참조합니다: 스캐폴드 플래그, 평가 루브릭, 안전 가드레일, 프로덕션에서 모니터링할 트레이스 속성 등입니다. 빈 화면에서 시작하지 말고, <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/agent-garden">Agent Garden</a>에서 원하는 형태와 가까운 기존 템플릿을 찾아 커스텀하세요.</p>
+<p>전형적인 명세는 한 화면 분량의 마크다운입니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gh"># .agents-cli-spec.md — outage-recovery-bot</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gu">## Tools</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>| Tool                                    | Backing service       |
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>| --------------------------------------- | --------------------- |
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>| <span class="sb">`query_logs(service, severity)`</span>         | Cloud Logging         |
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>| <span class="sb">`check_metrics(service, metric)`</span>        | Cloud Monitoring      |
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>| <span class="sb">`search_runbook(query)`</span>                 | Vector Search         |
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gu">## Constraints</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">1.</span> Always cite the runbook section consulted.
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">2.</span> Never recommend a destructive remediation unless the runbook
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>   explicitly sanctions it for the observed symptom.
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gu">## Success criteria</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">-</span><span class="w"> </span>≥ 80% of incidents get a diagnosis whose root cause matches ground truth
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="k">-</span><span class="w"> </span>100% of recommendations cite a runbook section
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="k">-</span><span class="w"> </span>0 destructive recommendations without runbook sanction
+</code></pre></div>
+<h3 id="1-scaffold">1 · Scaffold (스캐폴드)<a class="headerlink" href="#1-scaffold" title="Permanent link">&para;</a></h3>
+<p>단 하나의 명령어로 명세를 읽어 에이전트 코드, 테스트, 평가 보일러플레이트, Terraform, CI/CD 워크플로우, 배포 매니페스트 등 프로젝트를 생성합니다. 플래그는 불필요하게 제공되지 않으며, 지정된 라이프사이클에 맞게 스캐폴드를 확장하거나 축소합니다.</p>
+<div id="lifecycle-anim-scaffold" class="lifecycle-anim" aria-label="Scaffold wizard — toggle flags, watch the command and file count update"></div>
+
+<p>전체 설정 시 에이전트 코드, 평가 보일러플레이트, Terraform, GitHub Actions 워크플로우, 배포 매니페스트 전반에 걸쳐 <strong>~72개 파일</strong>이 생성됩니다. 필요하지 않은 요소를 건너뛰어 슬림하게 유지할 수 있습니다. 전체 목록은 <a href="../templates/">템플릿</a>을 참고하세요.</p>
+<h3 id="2-build">2 · Build (구축)<a class="headerlink" href="#2-build" title="Permanent link">&para;</a></h3>
+<p>모든 ADK 에이전트는 모델, 지시사항, 툴 목록, 그리고 이를 감싸는 <code>App</code>이라는 4가지 핵심 요소로 귀결됩니다. 에이전트 본체는 약 30줄 정도의 코드이며, 중요한 작업은 툴 내부에서 일어납니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.apps</span><span class="w"> </span><span class="kn">import</span> <span class="n">App</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">google.adk.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gemini</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">root_agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;root_agent&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">model</span><span class="o">=</span><span class="n">Gemini</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-3.6-flash&quot;</span><span class="p">),</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">instruction</span><span class="o">=</span><span class="s2">&quot;You are an SRE outage-recovery assistant...&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">query_logs</span><span class="p">,</span> <span class="n">check_metrics</span><span class="p">,</span> <span class="n">search_runbook</span><span class="p">],</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">app</span> <span class="o">=</span> <span class="n">App</span><span class="p">(</span><span class="n">root_agent</span><span class="o">=</span><span class="n">root_agent</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;app&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Gemini에만 국한되지 않습니다 — 모델 구문을 ADK가 지원하는 다른 제공업체로 교체할 수 있습니다(<a href="https://cloud.google.com/model-garden">Model Garden</a>에서 Anthropic Claude, OpenAI GPT 등을 지원). 교체하더라도 라이프사이클의 나머지 동작 방식은 동일합니다.</p>
+<p>상태 유지가 필요한 에이전트는 Agent Platform의 두 가지 추가 기능을 사용합니다:</p>
+<ul>
+<li><strong>매니지드 세션 저장소 (Managed session storage)</strong>: 재시작 시에도 유지되고 수평 확장이 가능한 대화 상태 관리 기능으로, 스캐폴드 시 기본 인메모리 대신 <code>--session-type agent_platform_sessions</code> 옵션으로 선택할 수 있습니다.</li>
+<li><strong><a href="https://cloud.google.com/agent-builder/docs/memory">Memory Bank</a></strong>: 세션을 뛰어넘는 <em>장기</em> 메모리로, SRE 봇이 "지난 분기 장애와 유사함"을 인식할 수 있게 해줍니다. <code>from google.adk.memory import VertexAiMemoryBankService</code>를 통해 연결하면 사용자, 세션, 앱 키에 지정된 영구 저장소를 얻게 됩니다.</li>
+</ul>
+<p>단일 HTTP 요청에 다 담기지 않는 워크플로우(긴 조사, 다단계 배치 작업)의 경우, Agent Runtime이 에이전트 상태를 유지하므로 배포나 재시작 시에도 진행 상황을 잃지 않습니다.</p>
+<div id="lifecycle-anim-models" class="lifecycle-anim" aria-label="Same prompt, three model providers — illustrative side-by-side"></div>
+
+<p>동일한 에이전트 본체가 다른 장애 시나리오에 응답하는 전체 과정입니다:</p>
+<div id="lifecycle-anim-playground" class="lifecycle-anim" aria-label="Inline playground — payments triage scenario, click to step through"></div>
+
+<h3 id="3-orchestrate">3 · Orchestrate (오케스트레이션)<a class="headerlink" href="#3-orchestrate" title="Permanent link">&para;</a></h3>
+<p>단일 에이전트 구조는 문제 규모가 작을 때 유효합니다. 실제 프로덕션 에이전트는 <strong>팀</strong> 단위로 성장합니다 — 오케스트레이터가 각각 좁은 역할과 툴을 가진 전담 에이전트들에게 작업을 라우팅하는 구조입니다.</p>
+<div id="lifecycle-anim-team" class="lifecycle-anim" aria-label="Team diagram — orchestrator routes work to investigator, diagnoser, and remediator"></div>
+
+<p>팀 분할은 평가, 배포, 관찰 시 세 가지 이점을 줍니다: 더 작고 명확한 프롬프트는 에이전트 신뢰성을 향상시키며, 독립된 툴 영역을 통해 에이전트별 가드레일을 적용할 수 있고, 트레이스를 통해 어떤 서브 에이전트가 오동작했는지 정확히 추적할 수 있습니다.</p>
+<p>팀이 프로세스 경계를 넘어서거나 타 팀이 소유한 에이전트를 호출해야 하는 경우, 통신 프로토콜로 <strong><a href="https://a2a-protocol.org/">A2A 프로토콜</a></strong>을 사용하세요. A2A는 모든 ADK 에이전트에 내장되어 있으므로 정상적으로 스캐폴딩(<code>--agent adk</code>)하면 됩니다. Agents CLI로 만들어졌든 아니든 A2A 호환 에이전트라면 서로 자유롭게 호출할 수 있습니다.</p>
+<h3 id="4-evaluate">4 · Evaluate (평가)<a class="headerlink" href="#4-evaluate" title="Permanent link">&para;</a></h3>
+<p>대부분의 에이전트 데모가 건너뛰는 단계입니다. <code>agents-cli eval generate</code> 실행 후 <code>agents-cli eval grade</code>를 실행하면 라이브 에이전트에 대해 데이터셋을 실행하고, LLM 판정관(judge)을 통해 루브릭 대비 각 응답을 채점하여 검증 가능한 객관적 수치를 제공합니다.</p>
+<div id="lifecycle-anim-eval" class="lifecycle-anim" aria-label="Eval-fix loop — click 'apply fix' to see one case flip from failing to passing"></div>
+
+<p><code>agents-cli eval grade</code> 루프를 5~10회 이상 반복 수행하게 됩니다. 수정할 때마다 점수가 향상되고, 재실행을 거쳐 목표 임계값을 넘으면 배포하게 됩니다. 아래는 루브릭이 가장 자주 잡아내는 4가지 실패 유형입니다.</p>
+<div id="lifecycle-anim-failures" class="lifecycle-anim" aria-label="Common agent failures and the eval rubric that catches each"></div>
+
+<p>메트릭, 데이터셋 스키마 및 전체 방법론은 <a href="../evaluation/">평가 가이드</a>를 참고하세요.</p>
+<h3 id="5-deploy">5 · Deploy (배포)<a class="headerlink" href="#5-deploy" title="Permanent link">&para;</a></h3>
+<p>동일한 에이전트 코드가 3가지 다른 환경에 배포될 수 있습니다. <code>agents-cli deploy</code>는 스캐폴딩 시 선택한 대상에 따라 작동합니다. <strong>환경을 선택하여 <code>--dry-run</code> 출력 내용과 다음 후속 단계를 확인하세요:</strong></p>
+<div id="lifecycle-anim-deploy" class="lifecycle-anim" aria-label="Deploy target picker — choose a runtime to see the dry-run + pipeline"></div>
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agents-cli<span class="w"> </span>deploy<span class="w"> </span>--dry-run<span class="w">        </span><span class="c1"># 파이프라인 미리보기</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>agents-cli<span class="w"> </span>deploy<span class="w">                  </span><span class="c1"># 배포 실행</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>agents-cli<span class="w"> </span>deploy<span class="w"> </span>--no-wait<span class="w">        </span><span class="c1"># 즉시 반환; 나중에 --status 로 확인</span>
+</code></pre></div>
+<p>각 배포 대상은 주변의 프로덕션 기본 기능들을 상속받습니다:</p>
+<ul>
+<li><strong>에이전트별 서비스 계정</strong>: <code>agents-cli deploy --agent-identity</code> 옵션을 통해 배포된 에이전트가 전용 GCP IAM 보안 주체로 실행됩니다. 일반 IAM을 사용하여 접근 가능한 대상(BigQuery 데이터셋, 버킷, API 등)을 최소 권한으로 설정하세요. 파괴적 복구를 차단하는 평가 루브릭에는 마지막 안전장치가 있습니다: 권한이 없으면 에이전트가 <code>kubectl delete</code>를 물리적으로 실행할 수 없습니다.</li>
+<li><strong><a href="https://cloud.google.com/iap">Identity-Aware Proxy (IAP)</a></strong>: <code>--iap</code> 플래그를 사용하여 Cloud Run 배포를 Google Workspace SSO 뒤에 보호할 수 있습니다. 내부 전용 에이전트가 공용 인터넷에 노출될 우려가 사라집니다.</li>
+<li><strong><a href="https://cloud.google.com/iam/docs/workload-identity-federation">Workload Identity Federation (WIF)</a></strong>: 스캐폴드된 <code>pr_checks.yaml</code>이 WIF를 통해 GitHub Actions를 GCP에 인증하므로 서비스 계정 키를 리포지토리에 저장할 필요가 없습니다.</li>
+</ul>
+<p>대상별 전체 단계는 <a href="../deployment/">배포 가이드</a>를 참고하세요.</p>
+<h3 id="6-publish">6 · Publish (게시)<a class="headerlink" href="#6-publish" title="Permanent link">&para;</a></h3>
+<p>에이전트 배포를 통해 URL로 접근할 수 있게 됩니다. 게시(Publish)는 다른 에이전트(또는 카탈로그를 탐색하는 사용자)가 이 에이전트를 실제로 찾을 수 있도록 Gemini Enterprise에 등록하는 별도의 단계입니다.</p>
+<div id="lifecycle-anim-publish" class="lifecycle-anim" aria-label="The agent's listing in Gemini Enterprise after publish"></div>
+
+<p>두 가지 등록 모드: <strong>ADK</strong> (배포된 Agent Runtime 인스턴스 게시) 및 <strong><a href="https://a2a-protocol.org/">A2A</a></strong> (A2A 호환 HTTP 엔드포인트 게시, ADK 필요 없음 — 모든 프레임워크 기반 에이전트 지원).</p>
+<h3 id="7-observe">7 · Observe (관찰)<a class="headerlink" href="#7-observe" title="Permanent link">&para;</a></h3>
+<p>에이전트가 라이브 상태가 되면, 모든 호출은 Cloud Trace 스팬을 내보냅니다. 모든 툴 호출, 모델 생성 및 서브 에이전트 핸드오프를 시각적으로 확인할 수 있습니다. <strong>아래 스팬 위에 마우스를 올려 속성을 검사해 보세요.</strong></p>
+<div id="lifecycle-anim-trace" class="lifecycle-anim" aria-label="Trace waterfall — bars draw in left-to-right showing the orchestrator and its sub-agents; hover to inspect"></div>
+
+<p>프로덕션에서 실행되는 에이전트에는 관찰 가능성이 필수적입니다. 평가에서 놓쳤을 수 있는 성능 저하, 과도한 호출 툴로 인한 비용 급증, 사용자가 안전 프롬프트를 우회하는 사례 등을 포착할 수 있습니다. 스캐폴드 시 <code>--bq-analytics</code> 옵션을 켜면 모든 프롬프트와 응답이 오프라인 분석을 위해 BigQuery에 저장됩니다.</p>
+<p>이 데이터는 다시 루프를 완성합니다: 프로덕션 트래픽이 내일의 데이터셋으로 환원됩니다. 평가 점수가 지속적으로 재계산되므로 성능 저하가 수개월이 아닌 며칠 만에 포착됩니다.</p>
+<div id="lifecycle-anim-rolling" class="lifecycle-anim" aria-label="Rolling production eval score over the last ten days, with annotated regression and deploy events"></div>
+
+<p>전체 설정 방법은 <a href="../observability/">관찰 가능성 가이드</a>를 참고하세요.</p>
+<h2 id="_4">실행하는 두 가지 방법<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<div class="lc-tabs-bare">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">코딩 에이전트에 요청하기</label><label for="__tabbed_1_2">CLI 직접 실행하기</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>가장 추천하는 표준적인 방법입니다. 코딩 에이전트가 스킬을 읽고 각 단계에 맞는 올바른 CLI 명령어를 선택합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Build me an outage-recovery agent. It should investigate incidents
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>using logs, metrics, and runbooks, and recommend remediations
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>that cite a runbook section. Deploy it to Agent Runtime.
+</code></pre></div>
+<p>코딩 에이전트의 수행 과정:</p>
+<ol>
+<li>툴과 제약 조건을 정의하는 <code>.agents-cli-spec.md</code> 작성</li>
+<li><code>agents-cli scaffold create … --agent adk --deployment-target agent_runtime</code> 실행 (RAG는 복사 및 학습용 레시피입니다 — RAG 샘플 활용; <a href="../templates/#rag-retrieval-augmented-generation">템플릿</a> 참고)</li>
+<li>에이전트 본체 및 툴 구현</li>
+<li>데이터셋 테스트 케이스 작성</li>
+<li><code>agents-cli eval generate</code> 및 <code>agents-cli eval grade</code> 실행 후, 점수가 임계값을 넘을 때까지 <code>eval grade</code> 반복</li>
+<li><code>agents-cli deploy</code> 실행</li>
+<li>트레이스 및 분석 연결 후 사용자에게 URL 전달</li>
+</ol>
+</div>
+<div class="tabbed-block">
+<p>모든 명령어는 단독으로 실행 가능합니다. 직접 명령어를 입력하려면 코딩 에이전트를 건너뛰어도 됩니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Phase 1: scaffold (스캐폴드)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>agents-cli<span class="w"> </span>scaffold<span class="w"> </span>create<span class="w"> </span>outage-recovery-bot<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>--agent<span class="w"> </span>adk<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span>--deployment-target<span class="w"> </span>agent_runtime<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span>--cicd-runner<span class="w"> </span>github_actions<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span>--bq-analytics
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nb">cd</span><span class="w"> </span>outage-recovery-bot<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>agents-cli<span class="w"> </span>install
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># Phase 2-3: build &amp; orchestrate (app/agent.py 수정)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>agents-cli<span class="w"> </span>playground<span class="w">       </span><span class="c1"># :8080 포트에서 로컬 웹 플레이그라운드 실행</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="c1"># Phase 4: evaluate (평가)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>agents-cli<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>dataset<span class="w"> </span>synthesize<span class="w"> </span>--count<span class="w"> </span><span class="m">10</span><span class="w">  </span><span class="c1"># 선택 사항: 데이터셋 콜드스타트 생성</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>agents-cli<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>generate
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>agents-cli<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>grade<span class="w">                          </span><span class="c1"># 평가 점수가 임계값을 넘을 때까지 반복</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>agents-cli<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>compare<span class="w"> </span>prev.json<span class="w"> </span>latest.json<span class="w">  </span><span class="c1"># 수정을 통해 실제 성능이 향상되었는지 확인</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>agents-cli<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>analyze<span class="w"> </span>--eval-result<span class="w"> </span>latest.json<span class="w">  </span><span class="c1"># 남은 실패 케이스 클러스터링</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>agents-cli<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>optimize<span class="w">                       </span><span class="c1"># 선택 사항: 평가 데이터로 프롬프트 자동 튜닝</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="c1"># Phase 5: deploy (배포)</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>agents-cli<span class="w"> </span>deploy<span class="w"> </span>--dry-run
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>agents-cli<span class="w"> </span>deploy
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="c1"># Phase 6: publish (게시 - 선택 사항)</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>agents-cli<span class="w"> </span>publish<span class="w"> </span>gemini-enterprise
+</code></pre></div>
+<p>전체 과정은 <a href="../hands-on-tutorial/">수동 워크플로우 튜토리얼</a>을 참고하세요.</p>
+</div>
+</div>
+</div>
+</div>
+<h2 id="_5">더 자세히 알아보기<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../templates/">템플릿</a> — 스캐폴드 템플릿(<code>adk</code>) 및 RAG 학습 레시피</li>
+<li><a href="../project-structure/">프로젝트 구조</a> — 생성된 각 파일의 역할</li>
+<li><a href="../development/">개발 가이드</a> — 일상적인 개발 워크플로우</li>
+<li><a href="../evaluation/">평가 가이드</a> — 데이터셋 스키마 및 평가-수정 루프</li>
+<li><a href="../deployment/">배포</a> — 배포 대상별 세부 가이드</li>
+<li><a href="../cicd/">CI/CD 및 프로덕션</a> — PR에서 프로덕션까지의 전체 경로</li>
+<li><a href="../observability/">관찰 가능성</a> — Cloud Trace, BigQuery 분석 및 서드파티 도구</li>
+<li><a href="../../cli/">CLI 참조 문서</a> — 모든 명령어 및 플래그</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../getting-started/" class="md-footer__link md-footer__link--prev" aria-label="이전: 시작하기">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                시작하기
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../quickstart-tutorial/" class="md-footer__link md-footer__link--next" aria-label="다음: 튜토리얼: 첫 에이전트 빌드">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                튜토리얼: 첫 에이전트 빌드
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.annotate", "content.code.select", "content.tabs.link", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.instant", "navigation.tabs", "navigation.path", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/persona.js"></script>
+      
+        <script src="../../javascripts/lifecycle.js"></script>
+      
+    
+  </body>
+</html>
