@@ -1,0 +1,117 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+site_name: agents-cli (한국어 문서)
+site_description: ADK 에이전트 개발 라이프사이클 전체를 지원하는 통합 CLI
+docs_dir: src
+site_dir: ../site-ko
+
+theme:
+  name: material
+  logo: assets/logo_sm.png
+  favicon: assets/logo_sm.png
+  language: ko
+  icon:
+    repo: octicons/mark-github-16
+  font:
+    text: Noto Sans KR
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: 다크 모드로 전환
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: 라이트 모드로 전환
+  features:
+    - content.code.copy
+    - content.code.annotate
+    - content.code.select
+    - content.tabs.link
+    - content.tooltips
+    - navigation.footer
+    - navigation.indexes
+    - navigation.sections
+    - navigation.instant
+    - navigation.tabs
+    - navigation.path
+    - toc.follow
+
+plugins:
+  - search
+
+markdown_extensions:
+  - mkdocs-click
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+repo_url: https://github.com/adk-labs/agents-cli-docs-ko
+repo_name: adk-labs/agents-cli-docs-ko
+
+extra_css:
+  - stylesheets/custom.css
+
+extra_javascript:
+  - javascripts/persona.js
+  - javascripts/lifecycle.js
+
+nav:
+  - 홈: index.md
+  - 가이드:
+    - 개요:
+      - 시작하기: guide/getting-started.md
+      - 라이프사이클: guide/lifecycle.md
+      - "튜토리얼: 첫 에이전트 빌드": guide/quickstart-tutorial.md
+      - "튜토리얼: 수동 워크플로우": guide/hands-on-tutorial.md
+      - 활용 사례: guide/use-cases.md
+      - 인증: guide/authentication.md
+    - 개발:
+      - 개발 가이드: guide/development.md
+      - 프로젝트 구조: guide/project-structure.md
+      - 에이전트 템플릿: guide/templates.md
+    - 평가:
+      - 평가 가이드: guide/evaluation.md
+    - 배포 및 운영:
+      - 배포: guide/deployment.md
+      - "CI/CD 및 운영 환경": guide/cicd.md
+      - 관찰 가능성:
+        - 개요: guide/observability/index.md
+        - Cloud Trace: guide/observability/cloud-trace.md
+        - BigQuery 플러그인: guide/observability/bq-agent-analytics.md
+  - 레퍼런스:
+    - reference/index.md
+    - CLI 명세: cli/index.md
+    - 스킬 목록: reference/skills.md
+    - 프로젝트 소개: reference/about.md
+    - Agent Starter Pack 마이그레이션: reference/from-agent-starter-pack.md
+    - 평가 데이터셋 마이그레이션: reference/eval-dataset-migration.md
